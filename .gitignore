@@ -45,5 +45,4 @@ pubspec.lock
 /android/app/profile
 /android/app/release
 
-github
-github.pub
+note.md
