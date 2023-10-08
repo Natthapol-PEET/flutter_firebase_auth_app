@@ -4,7 +4,7 @@
 ### Development Setup
 ```bash
 Design Pattern:			MVC
-Dependency Injection:	Binding
+Dependency Injection:		Binding
 State Management:		GetX
 Router Management:		GetRouter
 Service Management:		GetxService
