@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "995376568207",
+    "firebase_url": "https://g0lineapi-opxykx.firebaseio.com",
+    "project_id": "g0lineapi-opxykx",
+    "storage_bucket": "g0lineapi-opxykx.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995376568207:android:6daa7f27c157c973331dfa",
+        "android_client_info": {
+          "package_name": "com.example.flutter_firebase_auth_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQYjWUNqgOCQJvgYiWQQCaQ6dylNkE_dE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
