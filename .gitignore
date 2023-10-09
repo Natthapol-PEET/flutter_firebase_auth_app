@@ -46,3 +46,6 @@ pubspec.lock
 /android/app/release
 
 note.md
+
+/preview/*
+!/preview/*.gif

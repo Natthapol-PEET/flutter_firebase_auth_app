@@ -14,4 +14,4 @@ Rest Management:		GetConnect
 ```
 
 ### Preview app
-![alt text](https://github.com/Natthapol-PEET/flutter_firebase_auth_app/blob/main/preview/ezgif.com-gif-to-mp4.gif?raw=true)
+![alt text](https://github.com/Natthapol-PEET/flutter_firebase_auth_app/blob/main/preview/ezgif.com-gif-to-mp4.gif?raw=true | width=100)

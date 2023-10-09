@@ -31,8 +31,6 @@ class FireStoreDatabaseService extends GetxService {
   }
 
   Future<void> updateUser(UserModel userModel) {
-    print('updateUser');
-    print(userModel.toJson());
     CollectionReference<Map<String, dynamic>>? users =
         _fireStore?.collection('users');
     return users!.doc(userModel.docId).update(userModel.toJson());
