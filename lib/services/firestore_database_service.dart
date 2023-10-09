@@ -30,6 +30,14 @@ class FireStoreDatabaseService extends GetxService {
     return querySnapshot;
   }
 
+  Future<void> updateUser(UserModel userModel) {
+    print('updateUser');
+    print(userModel.toJson());
+    CollectionReference<Map<String, dynamic>>? users =
+        _fireStore?.collection('users');
+    return users!.doc(userModel.docId).update(userModel.toJson());
+  }
+
   Future<bool> hasUsername(String username) async {
     QuerySnapshot<Map<String, dynamic>> querySnapshot =
         await queryUser(ShareKey.username, username);

@@ -22,7 +22,7 @@ class RegisterController extends BaseController {
   CrytoUtil cryto = Get.find<CrytoUtil>();
 
   TextEditingController userController = TextEditingController();
-  TextEditingController passwordControllre = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPsswordController = TextEditingController();
   TextEditingController fullnameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -43,7 +43,7 @@ class RegisterController extends BaseController {
       ));
     }
 
-    List<String> passwd = VerifyUtil.password(passwordControllre.text);
+    List<String> passwd = VerifyUtil.password(passwordController.text);
     if (passwd.isNotEmpty) {
       worng.add(WrongModel(
         title: 'Password',
@@ -51,7 +51,7 @@ class RegisterController extends BaseController {
       ));
     }
 
-    if (passwordControllre.text != confirmPsswordController.text) {
+    if (passwordController.text != confirmPsswordController.text) {
       worng.add(WrongModel(
         title: 'Confirm Password',
         description: <String>['รหัสผ่านไม่ตรงกัน'],
@@ -88,7 +88,7 @@ class RegisterController extends BaseController {
   void registerUser() async {
     UserModel userModel = UserModel(
       username: userController.text,
-      password: cryto.hash(passwordControllre.text),
+      password: cryto.hash(passwordController.text),
       fullName: fullnameController.text,
       phoneNumber: phoneController.text,
       profileUrl: uploadImageUrl.value,
@@ -151,5 +151,15 @@ class RegisterController extends BaseController {
     }
 
     FocusManager.instance.primaryFocus?.unfocus();
+  }
+
+  @override
+  void onClose() {
+    userController.dispose();
+    passwordController.dispose();
+    confirmPsswordController.dispose();
+    fullnameController.dispose();
+    phoneController.dispose();
+    super.onClose();
   }
 }

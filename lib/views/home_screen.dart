@@ -4,6 +4,7 @@ import 'package:flutter_firebase_auth_app/components/app_cached_network_mage.dar
 import 'package:flutter_firebase_auth_app/components/app_text_form_field.dart';
 import 'package:flutter_firebase_auth_app/controllers/home_controller.dart';
 import 'package:flutter_firebase_auth_app/core/colors.dart';
+import 'package:flutter_firebase_auth_app/core/routers.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends GetView<HomeController> {
@@ -33,26 +34,26 @@ class HomeScreen extends GetView<HomeController> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: AppCachedNetworkImage(
-                  imageUrl: controller.userModel.profileUrl ?? '',
+                  imageUrl: controller.userModel?.profileUrl ?? '',
                 ),
               ),
               const SizedBox(height: 50),
               _title(context, text: 'ส่วนตัว'),
               const SizedBox(height: 10),
               AppTextFormField(
-                initialValue: 'ชื่อ : ${controller.userModel.fullName}',
+                initialValue: 'ชื่อ : ${controller.userModel?.fullName}',
                 readOnly: true,
               ),
               const Divider(color: Colors.grey, height: 0),
               AppTextFormField(
-                initialValue: 'เบอร์โทร : ${controller.userModel.phoneNumber}',
+                initialValue: 'เบอร์โทร : ${controller.userModel?.phoneNumber}',
                 readOnly: true,
               ),
               const SizedBox(height: 20),
               _title(context, text: 'บัญชี'),
               const SizedBox(height: 10),
               AppTextFormField(
-                initialValue: 'username : ${controller.userModel.username}',
+                initialValue: 'username : ${controller.userModel?.username}',
                 readOnly: true,
               ),
               const Divider(color: Colors.grey, height: 0),
@@ -66,7 +67,8 @@ class HomeScreen extends GetView<HomeController> {
                   Positioned(
                     right: 10,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () => Get.toNamed(RoutePath.changePassword,
+                          arguments: controller.userModel),
                       child: Text(
                         'เปลี่ยนรหัสผ่าน',
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(

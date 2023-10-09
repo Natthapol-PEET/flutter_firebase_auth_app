@@ -3,10 +3,18 @@ import 'package:flutter_firebase_auth_app/core/controller_base.dart';
 import 'package:flutter_firebase_auth_app/core/routers.dart';
 import 'package:flutter_firebase_auth_app/core/share_key.dart';
 import 'package:flutter_firebase_auth_app/models/user_model.dart';
+import 'package:flutter_firebase_auth_app/stores/user_store.dart';
 import 'package:get/get.dart';
 
 class HomeController extends BaseController {
-  UserModel get userModel => Get.arguments;
+  UserStore userStore = Get.find<UserStore>();
+  UserModel? userModel;
+
+  @override
+  void onInit() {
+    userModel = userStore.userModel;
+    super.onInit();
+  }
 
   void onClickLogout() {
     AppDialog.showWarning(

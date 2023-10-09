@@ -45,7 +45,7 @@ class RegisterScreen extends GetView<RegisterController> {
             AppTextFormField(
               hintText: 'Password',
               isPassword: true,
-              controller: controller.passwordControllre,
+              controller: controller.passwordController,
             ),
             const SizedBox(height: 10),
             AppTextFormField(

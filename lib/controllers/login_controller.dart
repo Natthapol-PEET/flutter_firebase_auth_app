@@ -8,6 +8,7 @@ import 'package:flutter_firebase_auth_app/core/update_id.dart';
 import 'package:flutter_firebase_auth_app/models/user_model.dart';
 import 'package:flutter_firebase_auth_app/models/wrong_model.dart';
 import 'package:flutter_firebase_auth_app/services/firestore_database_service.dart';
+import 'package:flutter_firebase_auth_app/stores/user_store.dart';
 import 'package:flutter_firebase_auth_app/utils/crypto_util.dart';
 import 'package:flutter_firebase_auth_app/utils/regex_verify_util.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ import 'package:get/get.dart';
 class LoginController extends BaseController {
   FireStoreDatabaseService fireStore = Get.find<FireStoreDatabaseService>();
   CrytoUtil cryto = Get.find<CrytoUtil>();
+  UserStore userStore = Get.find<UserStore>();
 
   TextEditingController userController = TextEditingController();
   TextEditingController passwordControllre = TextEditingController();
@@ -59,9 +61,10 @@ class LoginController extends BaseController {
         bool verifyPassword =
             cryto.verify(passwordControllre.text, listUserModel[0].password!);
         if (verifyPassword) {
+          userStore.userModel = listUserModel[0];
           prefs.setString(
               key: ShareKey.username, value: listUserModel[0].username!);
-          Get.offAllNamed(RoutePath.home, arguments: listUserModel[0]);
+          Get.offAllNamed(RoutePath.home);
         } else {
           _loginWrong();
         }
@@ -83,5 +86,12 @@ class LoginController extends BaseController {
       description: ['username หรือ password ไม่ถูกต้อง !!'],
     ));
     update([UpdateById.wrong, UpdateById.loginFail]);
+  }
+
+  @override
+  void onClose() {
+    userController.dispose();
+    passwordControllre.dispose();
+    super.onClose();
   }
 }

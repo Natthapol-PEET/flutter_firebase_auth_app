@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
+  String? docId;
   String? username;
   String? password;
   String? fullName;
@@ -10,6 +11,7 @@ class UserModel {
   Timestamp? updatedAt;
 
   UserModel({
+    this.docId,
     this.username,
     this.password,
     this.fullName,
@@ -20,6 +22,7 @@ class UserModel {
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
+    docId = json['doc_id'];
     username = json['user_name'];
     password = json['password'];
     fullName = json['full_name'];
@@ -30,6 +33,7 @@ class UserModel {
   }
 
   UserModel.fromDocument(QueryDocumentSnapshot<Object?> doc) {
+    docId = doc.id;
     username = doc.get('user_name');
     password = doc.get('password');
     fullName = doc.get('full_name');
@@ -41,6 +45,7 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    if (docId != null) data['doc_id'] = docId;
     data['user_name'] = username;
     data['password'] = password;
     data['full_name'] = fullName;

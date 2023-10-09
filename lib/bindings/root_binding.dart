@@ -1,5 +1,6 @@
 import 'package:flutter_firebase_auth_app/services/dotenv_service.dart';
 import 'package:flutter_firebase_auth_app/services/share_preference_service.dart';
+import 'package:flutter_firebase_auth_app/stores/user_store.dart';
 import 'package:get/get.dart';
 
 class RootBinding implements Bindings {
@@ -7,5 +8,6 @@ class RootBinding implements Bindings {
   void dependencies() {
     Get.put(DotEnvService());
     Get.put(SharedPreferenceService());
+    Get.put(UserStore());
   }
 }

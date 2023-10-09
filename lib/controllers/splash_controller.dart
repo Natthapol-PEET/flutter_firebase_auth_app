@@ -1,19 +1,22 @@
 import 'dart:async';
-
 import 'package:flutter_firebase_auth_app/components/dialog/app_dialog.dart';
 import 'package:flutter_firebase_auth_app/core/controller_base.dart';
 import 'package:flutter_firebase_auth_app/core/routers.dart';
 import 'package:flutter_firebase_auth_app/core/share_key.dart';
 import 'package:flutter_firebase_auth_app/models/user_model.dart';
 import 'package:flutter_firebase_auth_app/services/firestore_database_service.dart';
+import 'package:flutter_firebase_auth_app/stores/user_store.dart';
 import 'package:get/get.dart';
 
 class SplashController extends BaseController {
   FireStoreDatabaseService fireStore = Get.find<FireStoreDatabaseService>();
+  UserStore userStore = Get.find<UserStore>();
+
+  Timer? _timer;
 
   @override
   void onInit() {
-    Timer(const Duration(seconds: 3), () => hasUsername());
+    _timer = Timer(const Duration(seconds: 3), () => hasUsername());
     super.onInit();
   }
 
@@ -35,7 +38,8 @@ class SplashController extends BaseController {
       if (listUserModel.isEmpty) {
         Get.offAllNamed(RoutePath.login);
       } else {
-        Get.offAllNamed(RoutePath.home, arguments: listUserModel[0]);
+        userStore.userModel = listUserModel[0];
+        Get.offAllNamed(RoutePath.home);
       }
     } catch (e) {
       AppDialog.showError(
@@ -44,5 +48,11 @@ class SplashController extends BaseController {
         btnOkOnPress: () {},
       );
     }
+  }
+
+  @override
+  void onClose() {
+    _timer?.cancel();
+    super.dispose();
   }
 }
